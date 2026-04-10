@@ -1,0 +1,84 @@
+# 将 YOUR_GITHUB_USERNAME / YOUR_REPO_NAME 换成你的仓库（与推送到 GitHub 后一致）
+# 使用 GitHub 登录发布前，需按 DEPLOY.md 配置 OAuth 代理或 Netlify Identity 等（见文档）
+
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
+  branch: main
+
+# 若使用自建 OAuth 代理（见 DEPLOY.md），取消下一行注释并填写代理根地址（无尾斜杠）
+# base_url: https://your-oauth-proxy.example.com
+
+media_folder: public/uploads
+public_path: /uploads
+
+collections:
+  - name: resume
+    label: 简历
+    files:
+      - label: 简历数据
+        name: resume-data
+        file: public/resume.json
+        fields:
+          - label: 站点
+            name: meta
+            widget: object
+            fields:
+              - { label: 浏览器标题, name: siteTitle, widget: string }
+          - label: 基本信息
+            name: basic
+            widget: object
+            fields:
+              - { label: 姓名, name: name, widget: string }
+              - { label: 一句话介绍, name: tagline, widget: string }
+              - { label: 手机, name: phone, widget: string }
+              - { label: 邮箱, name: email, widget: string }
+          - label: 各板块标题
+            name: sectionTitles
+            widget: object
+            fields:
+              - { label: 教育背景, name: education, widget: string }
+              - { label: 工作经验, name: experience, widget: string }
+              - { label: 技能与工具, name: skills, widget: string }
+              - { label: 联系方式, name: contact, widget: string }
+          - label: 教育背景
+            name: education
+            widget: list
+            summary: '{{fields.school}}'
+            fields:
+              - { label: 条目 ID, name: id, widget: string, hint: 唯一，如 edu-1 }
+              - { label: 学校, name: school, widget: string }
+              - { label: 专业与学历, name: degree, widget: string }
+              - { label: 时间, name: period, widget: string }
+              - { label: 备注, name: note, widget: string, required: false }
+          - label: 工作经验
+            name: experience
+            widget: list
+            summary: '{{fields.company}} — {{fields.role}}'
+            fields:
+              - { label: 条目 ID, name: id, widget: string, hint: 唯一，如 exp-1 }
+              - { label: 公司, name: company, widget: string }
+              - { label: 职位, name: role, widget: string }
+              - { label: 时间, name: period, widget: string }
+              - { label: 摘要, name: summary, widget: text }
+              - label: 要点板块
+                name: highlights
+                widget: list
+                summary: '{{fields.title}}'
+                fields:
+                  - { label: 小标题, name: title, widget: string }
+                  - label: 要点条目
+                    name: items
+                    widget: list
+                    field:
+                      label: 内容
+                      name: text
+                      widget: text
+          - label: 技能与工具
+            name: skills
+            widget: list
+            summary: '{{fields.text}}'
+            field:
+              label: 单项
+              name: text
+              widget: string

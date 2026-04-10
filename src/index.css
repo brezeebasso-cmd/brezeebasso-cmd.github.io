@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  --bg: #0a0a0a;
+  --fg: #f2f0e4;
+  --card: #141414;
+  --gold: #d4af37;
+  --gold-dim: rgba(212, 175, 55, 0.35);
+  --muted: #888888;
+  --blue: #1e3d59;
+  --font-display: 'Italiana', 'Times New Roman', serif;
+  --font-body: 'Josefin Sans', system-ui, sans-serif;
+  --glow: 0 0 18px rgba(212, 175, 55, 0.22);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+a:hover {
+  color: #f2e8c4;
+  text-shadow: var(--glow);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
